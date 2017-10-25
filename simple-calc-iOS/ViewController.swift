@@ -106,11 +106,11 @@ class ViewController: UIViewController {
                 result = num1 / num2
             case "%":
                 result = num1.truncatingRemainder(dividingBy: num2)
-            case "Count":
+            case "count":
                 numbers.append(num2)
                 result = Double(numbers.count)
                 numbers = []
-            case "Avg.":
+            case "avg":
                 var total: Double = 0
                 numbers.append(num2)
                 for n in numbers {
@@ -129,7 +129,7 @@ class ViewController: UIViewController {
                 self.display.text! = ("\(result)")
             }
             
-        case "Fact.":
+        case "fact":
             let result = factorial(num: Double(self.display.text!)!)
             let isInteger = floor(result) == result
             if (isInteger) {
@@ -139,12 +139,12 @@ class ViewController: UIViewController {
             }
             num1 = 0
             
-        case "Count":
+        case "count":
             operation = "Count"
             numbers.append(num1)
             num1 = 0
             
-        case "Avg.":
+        case "avg":
             operation = "Avg."
             numbers.append(num1)
             num1 = 0
