@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  simple-calc-iOS
 //
-//  Created by Su Wang on 10/24/17.
+//  Created by Su Wang on 10/30/17.
 //  Copyright © 2017 Su Wang. All rights reserved.
 //
 

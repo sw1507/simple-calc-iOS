@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  simple-calc-iOS
 //
-//  Created by Su Wang on 10/24/17.
+//  Created by Su Wang on 10/30/17.
 //  Copyright © 2017 Su Wang. All rights reserved.
 //
 
@@ -12,11 +12,12 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var display: UILabel!
     
-    var operation: String = ""
-    var num1: Double = 0
-    var numbers: [Double] = []
-    var equals = false
-    var stateOp = false
+    
+    var MiddleOfTyping = false
+    var factorial = 1
+    var inputArray = [Double]()
+    var tempResult = 0.0
+    var operation = ""
 
     
     override func viewDidLoad() {
@@ -29,143 +30,76 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
     @IBAction func numbers(_ sender: UIButton) {
-        
-        if (display.text! == "0") {
-            display.text = ""
+        let digit = sender.currentTitle!
+        if MiddleOfTyping == true {
+            let textCurrentDisplay = display.text!
+            display!.text = textCurrentDisplay + digit
+        } else {
+            display.text = digit
+            MiddleOfTyping = true
         }
-        if (equals == true) {
-            display.text = ""
-            equals = false
-        }
-        if (stateOp == true) {
-            display.text = ""
-            stateOp = false
-        }
-        switch sender.titleLabel!.text! {
-        case ".":
-            if (self.display.text!.range(of: ".") == nil) {
-                self.display.text! += "."
-            }
-        case "0":
-            self.display.text! += "0"
-        case "1":
-            self.display.text! += "1"
-        case "2":
-            self.display.text! += "2"
-        case "3":
-            self.display.text! += "3"
-        case "4":
-            self.display.text! += "4"
-        case "5":
-            self.display.text! += "5"
-        case "6":
-            self.display.text! += "6"
-        case "7":
-            self.display.text! += "7"
-        case "8":
-            self.display.text! += "8"
-        case "9":
-            self.display.text! += "9"
-        default:
-            break
-        }
-        
+
     }
-
-
+    
+    
     @IBAction func operations(_ sender: UIButton) {
-        
-        if (sender.titleLabel!.text! != "=") {
-            num1 = Double(self.display.text!)!
-            stateOp = true
-        }
-        switch (sender.titleLabel!.text!) {
-        case "+":
-            self.operation = "+"
-        case "-":
-            self.operation = "-"
-        case "*":
-            self.operation = "*"
-        case "/":
-            self.operation = "/"
-        case "%":
-            self.operation = "%"
-        case "=":
-            equals = true
-            let num2 = Double(self.display.text!)!
-            var result: Double = 0
-            switch self.operation {
-            case "+":
-                result = num1 + num2
-            case "-":
-                result = num1 - num2
-            case "*":
-                result = num1 * num2
-            case "/":
-                result = num1 / num2
-            case "%":
-                result = num1.truncatingRemainder(dividingBy: num2)
-            case "count":
-                numbers.append(num2)
-                result = Double(numbers.count)
-                numbers = []
-            case "avg":
-                var total: Double = 0
-                numbers.append(num2)
-                for n in numbers {
-                    total += n
-                }
-                result = total / Double(numbers.count)
-                numbers = []
+        let symbol = sender.currentTitle! //store the input operation
+        operation = symbol
+        inputArray.append((Double)(display.text!)!)
+        switch symbol {
+            case "+", "-", "*", "/", "%", "Count", "Avg":
+                display.text = operation
+            case "Fact":
+                for i in 1...(Int)(inputArray[0]) { // from 1 to 5+1
+                    factorial = factorial * i
+            }
+            display.text = String(factorial)
+            MiddleOfTyping = false
+            factorial = 1
+            inputArray = [Double]()
+            tempResult = 0
+            operation = ""
             default:
                 break
             }
-            num1 = 0
-            let isInteger = floor(result) == result
-            if (isInteger) {
-                self.display.text! = ("\(Int(result))")
-            } else {
-                self.display.text! = ("\(result)")
-            }
-            
-        case "fact":
-            let result = factorial(num: Double(self.display.text!)!)
-            let isInteger = floor(result) == result
-            if (isInteger) {
-                self.display.text! = ("\(Int(result))")
-            } else {
-                self.display.text! = ("\(result)")
-            }
-            num1 = 0
-            
-        case "count":
-            operation = "Count"
-            numbers.append(num1)
-            num1 = 0
-            
-        case "avg":
-            operation = "Avg."
-            numbers.append(num1)
-            num1 = 0
-            
-        case "AC":
-            numbers = []
-            num1 = 0
-            operation = ""
-            self.display.text! = "0"
+        MiddleOfTyping = false
+    }
+    
+    
+    @IBAction func equals(_ sender: UIButton) {
+        inputArray.append((Double)(display.text!)!)
+        switch operation {
+            case "+":
+               tempResult = inputArray[0] + inputArray[1]
+            case "-":
+               tempResult = inputArray[0] - inputArray[1]
+            case "*":
+                tempResult = inputArray[0] * inputArray[1]
+            case "/":
+                tempResult = inputArray[0] / inputArray[1]
+            case "%":
+                tempResult = Double((Int)(inputArray[0]) % (Int)(inputArray[1]))
+            case "Count":
+                tempResult = Double(inputArray.count)
+            case "Avg":
+                var temp = 0.0
+                for i in 1...inputArray.count {
+                    temp = temp + inputArray[i-1]
+                }
+                tempResult = Double(temp / (Double)(inputArray.count))
+            default:
+                break
+        }
+        display.text = (String)(tempResult)
+        MiddleOfTyping = false
+        factorial = 1
+        inputArray = [Double]()
+        tempResult = 0
+        operation = ""
+    }
+    
 
-            
-        default:
-            break
-        }
-    }
-    func factorial(num: Double) -> Double {
-        if num == 0 {
-            return 1
-        } else {
-            return num * factorial(num: num - 1)
-        }
-    }
 }
 

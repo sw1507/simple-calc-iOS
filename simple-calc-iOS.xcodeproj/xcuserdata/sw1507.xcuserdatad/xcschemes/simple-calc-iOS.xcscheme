@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "28D11E711F9FF15D005062FF"
+               BlueprintIdentifier = "2889552A1FA7FA0000176BCD"
                BuildableName = "simple-calc-iOS.app"
                BlueprintName = "simple-calc-iOS"
                ReferencedContainer = "container:simple-calc-iOS.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "28D11E711F9FF15D005062FF"
+            BlueprintIdentifier = "2889552A1FA7FA0000176BCD"
             BuildableName = "simple-calc-iOS.app"
             BlueprintName = "simple-calc-iOS"
             ReferencedContainer = "container:simple-calc-iOS.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "28D11E711F9FF15D005062FF"
+            BlueprintIdentifier = "2889552A1FA7FA0000176BCD"
             BuildableName = "simple-calc-iOS.app"
             BlueprintName = "simple-calc-iOS"
             ReferencedContainer = "container:simple-calc-iOS.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "28D11E711F9FF15D005062FF"
+            BlueprintIdentifier = "2889552A1FA7FA0000176BCD"
             BuildableName = "simple-calc-iOS.app"
             BlueprintName = "simple-calc-iOS"
             ReferencedContainer = "container:simple-calc-iOS.xcodeproj">
